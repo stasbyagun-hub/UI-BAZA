@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI / UX Design — Checklista (Material 3 + Nielsen + MDN)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-main: #1f1f1f;
+      --text-muted: #5f6368;
+      --border: #e0e2ec;
+      --primary: #00639b;
+      --primary-hover: #004d7a;
+      --primary-light: #e8f0fe;
+      --accent: #2e7d32;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
+      --shadow-hover: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121212;
+        --card-bg: #1e1e1e;
+        --text-main: #e3e3e3;
+        --text-muted: #9aa0a6;
+        --border: #33393f;
+        --primary: #7fcfff;
+        --primary-hover: #a1dcff;
+        --primary-light: #1b3548;
+        --accent: #81c784;
+        --shadow: 0 2px 4px rgba(0,0,0,0.5);
+        --shadow-hover: 0 6px 12px rgba(0,0,0,0.6);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 16px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .header-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .badge-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .badge-icon {
+        color: #121212;
+      }
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .progress-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .progress-bar-bg {
+      flex: 1;
+      height: 10px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .progress-counter {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-muted);
+      min-width: 65px;
+      text-align: right;
+    }
+
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 0 4px;
+    }
+
+    .btn-action {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:hover {
+      background: var(--primary-light);
+    }
+
+    /* Sekcje akordeonu */
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .section-card:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    summary {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 600;
+      font-size: 15px;
+      outline: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chevron {
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+
+    details[open] .chevron {
+      transform: rotate(90deg);
+    }
+
+    .sec-badge {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg);
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .sec-progress-bar {
+      height: 3px;
+      background: var(--border);
+      width: 100%;
+    }
+
+    .sec-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .items-list {
+      padding: 10px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .check-item:hover {
+      background-color: var(--primary-light);
+    }
+
+    .check-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--text-muted);
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 2px;
+      flex-shrink: 0;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .check-item input[type="checkbox"]:checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .check-item input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .check-item input[type="checkbox"]:checked::after {
+        color: #121212;
+      }
+    }
+
+    .item-text {
+      font-size: 14px;
+      color: var(--text-main);
+      line-height: 1.45;
+      flex: 1;
+      transition: opacity 0.2s;
+    }
+
+    .check-item.done .item-text {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 6px;
+      vertical-align: middle;
+      border: 1px solid var(--border);
+    }
+
+    .tag-m3 { background: #e3f2fd; color: #1565c0; border-color: #bbdefb; }
+    .tag-ux { background: #f3e5f5; color: #7b1fa2; border-color: #e1bee7; }
+    .tag-a11y { background: #e8f5e9; color: #2e7d32; border-color: #c8e6c9; }
+
+    @media (prefers-color-scheme: dark) {
+      .tag-m3 { background: #132f4c; color: #90caf9; border-color: #1e4976; }
+      .tag-ux { background: #3b1b4d; color: #ce93d8; border-color: #5c2b79; }
+      .tag-a11y { background: #183824; color: #a5d6a7; border-color: #255737; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Nagłówek -->
+    <div class="header-card">
+      <div class="header-top">
+        <div class="badge-icon">M3</div>
+        <div>
+          <h1>UI / UX Design — Kompletna Checklista</h1>
+          <p class="subtitle">Material Design 3 · Heurystyki Nielsena · MDN / WCAG</p>
+        </div>
+      </div>
+      <div class="progress-wrapper">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="global-progress"></div>
+        </div>
+        <div class="progress-counter" id="global-counter">0 / 0</div>
+      </div>
+    </div>
+
+    <!-- Pasek akcji -->
+    <div class="controls-bar">
+      <span style="font-size: 13px; color: var(--text-muted);" id="percent-label">Postęp: 0%</span>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn-action" onclick="toggleAll(true)">Rozwiń wszystko</button>
+        <button class="btn-action" onclick="toggleAll(false)">Zwiń wszystko</button>
+        <button class="btn-action" onclick="resetAll()">Resetuj</button>
+      </div>
+    </div>
+
+    <!-- Kontener na sekcje -->
+    <div id="checklist-sections"></div>
+
+  </div>
+
+  <script>
+    const DATA = [
+      {
+        title: "🎨 Kolor, Motyw i Kontrast",
+        items: [
+          { text: "Zdefiniowano kolor źródłowy (seed color) i wygenerowano harmonijną paletę tonalną (np. M3 Theme Builder)", tag: "M3" },
+          { text: "Zastosowano semantyczne role kolorów: Primary, Secondary, Tertiary, Error, Surface, On-Surface", tag: "M3" },
+          { text: "Obsługiwany spójny tryb jasny i ciemny (light / dark theme)", tag: "M3" },
+          { text: "Dynamic Color — interfejs wspiera motywy systemowe i tapetę użytkownika (Android 12+ / Material You)", tag: "M3" },
+          { text: "Kontrast tekst/tło spełnia standard WCAG AA (≥ 4.5:1 dla tekstu normalnego, 3:1 dla dużego)", tag: "A11Y" },
+          { text: "Kolor nie jest jedynym nośnikiem informacji (zawsze towarzyszy mu ikona, tekst lub etykieta)", tag: "A11Y" }
+        ]
+      },
+      {
+        title: "🔤 Typografia i Język",
+        items: [
+          { text: "Wdrożono skalę typograficzną M3: Display, Headline, Title, Body, Label", tag: "M3" },
+          { text: "Maksymalnie 2–3 rodziny fontów w całej aplikacji", tag: "M3" },
+          { text: "Rozmiary i wysokości linii (line-height) są czytelne na każdym urządzeniu (min. 14–16sp/px dla body)", tag: "M3" },
+          { text: "Rozmiary podane w jednostkach względnych (rem, em, %) — interfejs skaluje się do 200% bez psucia układu", tag: "A11Y" },
+          { text: "Język interfejsu jest naturalny, prosty i wolny od żargonu technicznego (zgodny z modelem mentalnym)", tag: "UX" },
+          { text: "Teksty linków są precyzyjne i opisowe (brak generycznych „Kliknij tutaj” / „Więcej”)", tag: "A11Y" }
+        ]
+      },
+      {
+        title: "📐 Układ, Siatka i Nawigacja",
+        items: [
+          { text: "Stosowana responsywna siatka (4 kolumny – mobile, 8 – tablet, 12 – desktop)", tag: "M3" },
+          { text: "Marginesy i odstępy bazują na stałym rytmie (wielokrotności 4dp / 8dp)", tag: "M3" },
+          { text: "Layout dopasowany do breakpointów: Compact (<600dp), Medium (600-840dp), Expanded (>840dp)", tag: "M3" },
+          { text: "Właściwy wzorzec nawigacji: Navigation Bar (mobile), Navigation Rail (tablet), Navigation Drawer (desktop)", tag: "M3" },
+          { text: "Minimalizm estetyczny — usunięto zbędny szum informacyjny, każdy element służy celowi", tag: "UX" },
+          { text: "Stałe, przewidywalne rozmieszczenie nawigacji na każdym ekranie", tag: "UX" }
+        ]
+      },
+      {
+        title: "🧩 Komponenty i Kształty",
+        items: [
+          { text: "Przyciski: Filled (akcja główna), Tonal / Outlined (akcje drugorzędne), Text (akcje pomocnicze)", tag: "M3" },
+          { text: "FAB (Floating Action Button) max 1 na ekran, dedykowany wyłącznie najważniejszej czynności", tag: "M3" },
+          { text: "Karty (Cards) — Elevated, Filled lub Outlined dobrane logicznie do hierarchii informacji", tag: "M3" },
+          { text: "Dialogi i okna modalne używane tylko do krytycznych decyzji i potwierdzeń", tag: "M3" },
+          { text: "Pola formularzy (Text Fields) posiadają czytelne etykiety, helper text i komunikaty walidacji", tag: "M3" },
+          { text: "Kształty zgodne z M3 Shape Scale (0–28dp) — zaokrąglenie skorelowane z rozmiarem komponentu", tag: "M3" },
+          { text: "Elewacja tonalna (Surface Tint) używana zamiast ciężkich cieni drop shadow", tag: "M3" },
+          { text: "Zaprojektowano wszystkie stany interaktywne: enabled, disabled, hovered, focused, pressed", tag: "M3" }
+        ]
+      },
+      {
+        title: "✨ Ruch i Mikrointerakcje",
+        items: [
+          { text: "Płynne przejścia ekranowe: Container Transform oraz ruch współdzielony (Shared Axis)", tag: "M3" },
+          { text: "Wyraźny feedback na dotyk/kliknięcie (ripple effect, reakcja na naciśnięcie)", tag: "M3" },
+          { text: "Czas animacji w granicach 150–300ms, z krzywymi easing M3 (emphasized, standard)", tag: "M3" },
+          { text: "Wsparcie dla prefers-reduced-motion: reduce — możliwość wyłączenia lub złagodzenia animacji", tag: "A11Y" },
+          { text: "Wideo, slajdery i auto-animacje mają widoczny przycisk pauzy/zatrzymania", tag: "A11Y" }
+        ]
+      },
+      {
+        title: "🧠 UX, Feedback i Zapobieganie Błędom",
+        items: [
+          { text: "Widoczność statusu systemu: loadery, progress bary, komunikaty snackbar po każdej operacji", tag: "UX" },
+          { text: "Kontrola i wolność: opcja „Cofnij” (Undo), łatwe anulowanie i bezpieczne wyjście awaryjne", tag: "UX" },
+          { text: "Zapobieganie błędom: blokada złych formatów, potwierdzenia przed akcjami destrukcyjnymi", tag: "UX" },
+          { text: "Rozpoznawanie zamiast przypominania: autouzupełnianie, historia ostatnich wyszukiwań, widoczne opcje", tag: "UX" },
+          { text: "Elastyczność i skróty: skróty klawiszowe, szybkie filtry i akcje grupowe dla zaawansowanych", tag: "UX" },
+          { text: "Komunikaty błędów w prostym języku — bez numerów kodów, precyzyjnie wyjaśniają jak naprawić błąd", tag: "UX" },
+          { text: "Walidacja formularzy inline przy konkretnym polu, nie dopiero po wysłaniu formularza", tag: "UX" },
+          { text: "Puste stany (empty states) zawierają przyjazną grafikę, opis i sugerowany krok do przodu", tag: "UX" },
+          { text: "Pomoc kontekstowa: dymki podpowiedzi (tooltips), onboarding i przeszukiwalne FAQ", tag: "UX" }
+        ]
+      },
+      {
+        title: "♿ Dostępność (A11y) i Semantyczny Kod",
+        items: [
+          { text: "Minimalny obszar dotykowy to 48×48 dp / px z zachowaniem odpowiednich przerw", tag: "M3" },
+          { text: "Pełna dostępność z klawiatury (Tab, Shift+Tab, Enter, Spacja, strzałki)", tag: "A11Y" },
+          { text: "Wyraźny wizualny wskaźnik fokusa (focus indicator) — nigdy nie usuwać outline bez zamiennika", tag: "A11Y" },
+          { text: "Pułapka fokusa (focus trap) w oknach dialogowych — klawiatura nie ucieka w tło strony", tag: "A11Y" },
+          { text: "Semantyczne znaczniki HTML (<header>, <main>, <nav>, <button>, <input>) zamiast klikalnych divów", tag: "A11Y" },
+          { text: "Każdy <input> w formularzu ma trwale powiązaną etykietę <label for='...'>", tag: "A11Y" },
+          { text: "Wszystkie obrazy mają atrybut alt (opisowy lub pusty alt='' dla czysto dekoracyjnych)", tag: "A11Y" },
+          { text: "Zasada ARIA: „No ARIA is better than bad ARIA” — korzystanie z natywnego HTML na ile to możliwe", tag: "A11Y" }
+        ]
+      },
+      {
+        title: "🔍 Spójność i Końcowa Weryfikacja",
+        items: [
+          { text: "Spójność ikon — jednolity styl z Material Symbols (Outlined / Rounded / Sharp)", tag: "M3" },
+          { text: "Jednolite odstępy i marginesy w całej aplikacji", tag: "UX" },
+          { text: "Teksty nie ucinają się i nie wychodzą poza kontenery na żadnym ekranie", tag: "M3" },
+          { text: "Przetestowano na urządzeniach mobilnych, tabletach i monitorach ultrapanoramicznych", tag: "M3" },
+          { text: "Przetestowano czytnikiem ekranu (TalkBack / VoiceOver / NVDA) i w różnych przeglądarkach", tag: "A11Y" },
+          { text: "Aplikacja spełnia zasady WCAG POUR: Perceivable, Operable, Understandable, Robust", tag: "A11Y" }
+        ]
+      }
+    ];
+
+    const container = document.getElementById('checklist-sections');
+    const STORAGE_KEY = 'unified_ui_ux_checklist_v3';
+
+    function getTagClass(tag) {
+      if (tag === 'M3') return 'tag-m3';
+      if (tag === 'UX') return 'tag-ux';
+      return 'tag-a11y';
+    }
+
+    // Renderowanie sekcji
+    DATA.forEach((sec, sIdx) => {
+      const details = document.createElement('details');
+      details.className = 'section-card';
+      details.open = sIdx === 0;
+
+      let itemsHtml = '';
+      sec.items.forEach((item, iIdx) => {
+        itemsHtml += `
+          <label class="check-item" data-sec="${sIdx}" data-item="${iIdx}">
+            <input type="checkbox" onchange="onItemToggle(this)">
+            <span class="item-text">
+              ${item.text}
+              <span class="tag ${getTagClass(item.tag)}">${item.tag}</span>
+            </span>
+          </label>
+        `;
+      });
+
+      details.innerHTML = `
+        <summary>
+          <div class="summary-left">
+            <span class="chevron">▶</span>
+            <span>${sec.title}</span>
+          </div>
+          <span class="sec-badge" id="sec-badge-${sIdx}">0 / ${sec.items.length}</span>
+        </summary>
+        <div class="sec-progress-bar">
+          <div class="sec-progress-fill" id="sec-bar-${sIdx}"></div>
+        </div>
+        <div class="items-list">
+          ${itemsHtml}
+        </div>
+      `;
+
+      container.appendChild(details);
+    });
+
+    function onItemToggle(checkbox) {
+      const parentLabel = checkbox.closest('.check-item');
+      parentLabel.classList.toggle('done', checkbox.checked);
+      updateAllProgress();
+      saveProgress();
+    }
+
+    function updateAllProgress() {
+      let totalAll = 0;
+      let totalDone = 0;
+
+      DATA.forEach((sec, sIdx) => {
+        const secCard = container.children[sIdx];
+        const boxes = secCard.querySelectorAll('input[type="checkbox"]');
+        const checked = secCard.querySelectorAll('input[type="checkbox"]:checked');
+        
+        const count = boxes.length;
+        const done = checked.length;
+        
+        totalAll += count;
+        totalDone += done;
+
+        // Sekcja
+        const badge = document.getElementById(`sec-badge-${sIdx}`);
+        const bar = document.getElementById(`sec-bar-${sIdx}`);
+        if (badge) badge.textContent = `${done} / ${count}`;
+        if (bar) bar.style.width = count ? `${(done / count) * 100}%` : '0%';
+      });
+
+      // Globalnie
+      const pct = totalAll ? Math.round((totalDone / totalAll) * 100) : 0;
+      document.getElementById('global-progress').style.width = `${pct}%`;
+      document.getElementById('global-counter').textContent = `${totalDone} / ${totalAll}`;
+      document.getElementById('percent-label').textContent = `Postęp: ${pct}%`;
+    }
+
+    function saveProgress() {
+      const state = [];
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(cb => state.push(cb.checked));
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    function loadProgress() {
+      try {
+        const state = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (state && Array.isArray(state)) {
+          const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          state.forEach((isChecked, i) => {
+            if (checkboxes[i]) {
+              checkboxes[i].checked = isChecked;
+              checkboxes[i].closest('.check-item').classList.toggle('done', isChecked);
+            }
+          });
+        }
+      } catch (e) {}
+      updateAllProgress();
+    }
+
+    function toggleAll(open) {
+      document.querySelectorAll('.section-card').forEach(d => d.open = open);
+    }
+
+    function resetAll() {
+      if (confirm('Czy na pewno chcesz zresetować wszystkie zaznaczenia?')) {
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+          cb.checked = false;
+          cb.closest('.check-item').classList.remove('done');
+        });
+        localStorage.removeItem(STORAGE_KEY);
+        updateAllProgress();
+      }
+    }
+
+    loadProgress();
+  </script>
+</body>
+</html>
