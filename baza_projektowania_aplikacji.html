@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baza Wiedzy: Projektowanie Aplikacji — M3 · WCAG 2.2 · Nielsen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --md-sys-color-primary: #005ac1;
+      --md-sys-color-on-primary: #ffffff;
+      --md-sys-color-primary-container: #d8e2ff;
+      --md-sys-color-on-primary-container: #001a41;
+      --md-sys-color-secondary: #575e71;
+      --md-sys-color-on-secondary: #ffffff;
+      --md-sys-color-secondary-container: #dbe2f9;
+      --md-sys-color-on-secondary-container: #141b2c;
+      --md-sys-color-tertiary: #715573;
+      --md-sys-color-on-tertiary: #ffffff;
+      --md-sys-color-tertiary-container: #fbd7fc;
+      --md-sys-color-on-tertiary-container: #29132d;
+      --md-sys-color-error: #ba1a1a;
+      --md-sys-color-on-error: #ffffff;
+      --md-sys-color-error-container: #ffdad6;
+      --md-sys-color-on-error-container: #410002;
+      --md-sys-color-background: #fdfcff;
+      --md-sys-color-on-background: #1a1c1e;
+      --md-sys-color-surface: #fdfcff;
+      --md-sys-color-on-surface: #1a1c1e;
+      --md-sys-color-surface-variant: #e1e2ec;
+      --md-sys-color-on-surface-variant: #44474f;
+      --md-sys-color-outline: #74777f;
+      --md-sys-color-outline-variant: #c4c6d0;
+      --md-sys-color-surface-container-lowest: #ffffff;
+      --md-sys-color-surface-container-low: #f7f3f9;
+      --md-sys-color-surface-container: #f1edfa;
+      --md-sys-color-surface-container-high: #ebe7f4;
+      --md-sys-color-surface-container-highest: #e5e1ee;
+      --shadow-1: 0 1px 3px 1px rgba(0,0,0,0.12), 0 1px 2px 0 rgba(0,0,0,0.18);
+      --shadow-2: 0 2px 6px 2px rgba(0,0,0,0.12), 0 1px 2px 0 rgba(0,0,0,0.2);
+      --shadow-3: 0 4px 8px 3px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.25);
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 28px;
+      --radius-full: 9999px;
+      --transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    [data-theme="dark"] {
+      --md-sys-color-primary: #adc6ff;
+      --md-sys-color-on-primary: #002e69;
+      --md-sys-color-primary-container: #004494;
+      --md-sys-color-on-primary-container: #d8e2ff;
+      --md-sys-color-secondary: #bfc6dc;
+      --md-sys-color-on-secondary: #293041;
+      --md-sys-color-secondary-container: #3f4759;
+      --md-sys-color-on-secondary-container: #dbe2f9;
+      --md-sys-color-tertiary: #debcdf;
+      --md-sys-color-on-tertiary: #402843;
+      --md-sys-color-tertiary-container: #583e5a;
+      --md-sys-color-on-tertiary-container: #fbd7fc;
+      --md-sys-color-error: #ffb4ab;
+      --md-sys-color-on-error: #690005;
+      --md-sys-color-error-container: #93000a;
+      --md-sys-color-on-error-container: #ffdad6;
+      --md-sys-color-background: #111318;
+      --md-sys-color-on-background: #e2e2e9;
+      --md-sys-color-surface: #111318;
+      --md-sys-color-on-surface: #e2e2e9;
+      --md-sys-color-surface-variant: #44474f;
+      --md-sys-color-on-surface-variant: #c4c6d0;
+      --md-sys-color-outline: #8e9099;
+      --md-sys-color-outline-variant: #44474f;
+      --md-sys-color-surface-container-lowest: #0c0e13;
+      --md-sys-color-surface-container-low: #191c20;
+      --md-sys-color-surface-container: #1e2025;
+      --md-sys-color-surface-container-high: #282a2f;
+      --md-sys-color-surface-container-highest: #33353a;
+      --shadow-1: 0 1px 3px 1px rgba(0,0,0,0.5);
+      --shadow-2: 0 2px 6px 2px rgba(0,0,0,0.6);
+      --shadow-3: 0 4px 8px 3px rgba(0,0,0,0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: var(--md-sys-color-background);
+      color: var(--md-sys-color-on-background);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    /* Skip link for WCAG 2.4.1 */
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 16px;
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      z-index: 9999;
+      font-weight: 600;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 16px;
+      outline: 3px solid var(--md-sys-color-primary-container);
+    }
+
+    /* Focus visible standard WCAG 2.2 */
+    :focus-visible {
+      outline: 3px solid var(--md-sys-color-primary);
+      outline-offset: 3px;
+      border-radius: var(--radius-xs);
+    }
+
+    /* Header M3 Top App Bar */
+    header.m3-top-app-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--md-sys-color-surface-container);
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--md-sys-color-primary), #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      box-shadow: var(--shadow-1);
+    }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-subtitle {
+      font-size: 0.78rem;
+      color: var(--md-sys-color-on-surface-variant);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      background: var(--md-sys-color-surface-container-low);
+      color: var(--md-sys-color-on-surface);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: var(--transition);
+    }
+    .icon-btn:hover {
+      background: var(--md-sys-color-surface-container-highest);
+      transform: translateY(-1px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px;
+      flex: 1;
+    }
+
+    /* Hero Banner */
+    .hero-card {
+      background: linear-gradient(135deg, var(--md-sys-color-primary-container) 0%, var(--md-sys-color-surface-container-high) 100%);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--radius-xl);
+      padding: 36px 32px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .m3-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-m3 {
+      background-color: #0284c7;
+      color: #ffffff;
+    }
+
+    .badge-wcag {
+      background-color: #16a34a;
+      color: #ffffff;
+    }
+
+    .badge-nielsen {
+      background-color: #9333ea;
+      color: #ffffff;
+    }
+
+    .hero-card h1 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--md-sys-color-on-primary-container);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-card p {
+      font-size: 1.05rem;
+      color: var(--md-sys-color-on-surface-variant);
+      max-width: 820px;
+      line-height: 1.6;
+    }
+
+    /* Search & Filter Toolbar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 52px;
+      padding: 0 18px 0 48px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--md-sys-color-outline);
+      background-color: var(--md-sys-color-surface-container-lowest);
+      color: var(--md-sys-color-on-surface);
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--md-sys-color-primary);
+      box-shadow: 0 0 0 2px var(--md-sys-color-primary);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: var(--md-sys-color-outline);
+      pointer-events: none;
+    }
+
+    /* Tabs Navigation (M3 Primary Tabs) */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+      margin-bottom: 28px;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      border-radius: var(--radius-full);
+      border: none;
+      background: transparent;
+      color: var(--md-sys-color-on-surface-variant);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover {
+      background-color: var(--md-sys-color-surface-container-high);
+      color: var(--md-sys-color-on-surface);
+    }
+
+    .tab-btn.active {
+      background-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+      box-shadow: var(--shadow-1);
+    }
+
+    /* Content Views */
+    .view-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Grid Layouts */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+    }
+
+    /* M3 Card */
+    .m3-card {
+      background-color: var(--md-sys-color-surface-container-lowest);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .m3-card:hover {
+      box-shadow: var(--shadow-2);
+      transform: translateY(-2px);
+      border-color: var(--md-sys-color-primary);
+    }
+
+    .card-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .heuristic-number {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      background-color: var(--md-sys-color-tertiary-container);
+      color: var(--md-sys-color-on-tertiary-container);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .card-title-group h3 {
+      font-size: 1.15rem;
+      color: var(--md-sys-color-on-surface);
+      margin-bottom: 4px;
+    }
+
+    .card-sub {
+      font-size: 0.8rem;
+      color: var(--md-sys-color-outline);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    .box-info {
+      background-color: var(--md-sys-color-surface-container);
+      border-left: 4px solid var(--md-sys-color-primary);
+      padding: 12px 14px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.88rem;
+    }
+
+    .box-warning {
+      background-color: var(--md-sys-color-error-container);
+      color: var(--md-sys-color-on-error-container);
+      border-left: 4px solid var(--md-sys-color-error);
+      padding: 12px 14px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.88rem;
+    }
+
+    .tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    .m3-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      font-weight: 600;
+      background-color: var(--md-sys-color-surface-container-high);
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    /* WCAG Criteria Section */
+    .wcag-header {
+      background: linear-gradient(135deg, rgba(22, 163, 74, 0.15), rgba(22, 163, 74, 0.05));
+      border: 1px solid rgba(22, 163, 74, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .code-preview {
+      background-color: #181c24;
+      color: #94a3b8;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      overflow-x: auto;
+      border: 1px solid #2d3748;
+    }
+    .code-preview code {
+      color: #38bdf8;
+    }
+
+    /* M3 Sandbox & Interactive Demos */
+    .sandbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .demo-card {
+      background-color: var(--md-sys-color-surface-container-low);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+
+    .demo-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    /* Buttons hierarchy preview */
+    .buttons-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-m3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-filled {
+      background-color: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+    }
+    .btn-filled:hover {
+      box-shadow: var(--shadow-1);
+      filter: brightness(1.08);
+    }
+
+    .btn-tonal {
+      background-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+    }
+    .btn-tonal:hover {
+      filter: brightness(0.96);
+    }
+
+    .btn-outlined {
+      background: transparent;
+      border: 1px solid var(--md-sys-color-outline);
+      color: var(--md-sys-color-primary);
+    }
+    .btn-outlined:hover {
+      background-color: var(--md-sys-color-surface-container-high);
+    }
+
+    .btn-text {
+      background: transparent;
+      color: var(--md-sys-color-primary);
+      padding: 10px 14px;
+    }
+    .btn-text:hover {
+      background-color: var(--md-sys-color-surface-container-high);
+    }
+
+    .fab-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      border: none;
+      box-shadow: var(--shadow-2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .fab-btn:hover {
+      box-shadow: var(--shadow-3);
+      transform: scale(1.05);
+    }
+
+    /* Target Size demo */
+    .target-box {
+      border: 2px dashed #e11d48;
+      background: rgba(225, 29, 72, 0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .target-m3 {
+      width: 48px;
+      height: 48px;
+      border-color: #16a34a;
+      background: rgba(22, 163, 74, 0.1);
+    }
+
+    /* Checklist Section */
+    .checklist-progress-bar {
+      width: 100%;
+      height: 12px;
+      background-color: var(--md-sys-color-surface-container-highest);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin: 16px 0 24px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #16a34a, #005ac1);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .check-item {
+      background-color: var(--md-sys-color-surface-container-lowest);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .check-item:hover {
+      background-color: var(--md-sys-color-surface-container-low);
+      border-color: var(--md-sys-color-primary);
+    }
+
+    .check-item.completed {
+      opacity: 0.75;
+      background-color: var(--md-sys-color-surface-container);
+    }
+    .check-item.completed .item-text {
+      text-decoration: line-through;
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--md-sys-color-primary);
+      margin-top: 3px;
+      cursor: pointer;
+    }
+
+    .item-content {
+      flex: 1;
+    }
+
+    .item-text {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface);
+      margin-bottom: 4px;
+    }
+
+    .item-meta {
+      font-size: 0.82rem;
+      color: var(--md-sys-color-outline);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Matrix Table */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      background-color: var(--md-sys-color-surface-container-lowest);
+    }
+
+    table.matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    table.matrix-table th {
+      background-color: var(--md-sys-color-surface-container-high);
+      color: var(--md-sys-color-on-surface);
+      padding: 16px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    table.matrix-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+      vertical-align: top;
+    }
+
+    table.matrix-table tr:hover td {
+      background-color: var(--md-sys-color-surface-container-low);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--md-sys-color-surface-container);
+      border-top: 1px solid var(--md-sys-color-outline-variant);
+      padding: 32px 24px;
+      text-align: center;
+      margin-top: 48px;
+      font-size: 0.88rem;
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hero-card {
+        padding: 24px 20px;
+      }
+      header.m3-top-app-bar {
+        padding: 12px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#glowna-tresc" class="skip-link">Przejdź do głównej treści (WCAG 2.4.1)</a>
+
+  <!-- Top App Bar -->
+  <header class="m3-top-app-bar" role="banner">
+    <div class="brand-wrap">
+      <div class="brand-icon" aria-hidden="true">📐</div>
+      <div>
+        <div class="brand-title">Baza Wiedzy Projektowania Aplikacji</div>
+        <div class="brand-subtitle">Google Material 3 · WCAG 2.2 · Heurystyki Jakoba Nielsena</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="themeToggle" class="icon-btn" title="Przełącz motyw ciemny/jasny" aria-label="Przełącz motyw ciemny/jasny">
+        🌙
+      </button>
+      <a href="BAZA_WIEDZY_PROJEKTOWANIE_APLIKACJI.md" download class="icon-btn" title="Pobierz pełną dokumentację Markdown" aria-label="Pobierz dokumentację Markdown">
+        📥
+      </a>
+    </div>
+  </header>
+
+  <main id="glowna-tresc" class="container">
+
+    <!-- Hero Card -->
+    <section class="hero-card">
+      <div class="hero-badges">
+        <span class="m3-badge badge-m3">Google Material 3</span>
+        <span class="m3-badge badge-wcag">WCAG 2.2 AA / AAA</span>
+        <span class="m3-badge badge-nielsen">10 Heurystyk Nielsena</span>
+      </div>
+      <h1>Synergia UI, UX i Dostępności Cyfrowej</h1>
+      <p>
+        Praktyczny system wiedzy integrujący psychologię percepcji (heurystyki użyteczności), rygorystyczne standardy prawne (WCAG 2.2) oraz kompletny design system Google Material 3 w jeden spójny proces tworzenia aplikacji webowych i mobilnych.
+      </p>
+    </section>
+
+    <!-- Toolbar: Search & View Tabs -->
+    <div class="toolbar">
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="text" id="searchInput" placeholder="Szukaj heurystyki, kryterium WCAG (np. 2.5.8), komponentu M3..." aria-label="Wyszukiwarka w bazie wiedzy">
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs-nav" aria-label="Kategorie bazy wiedzy" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" data-tab="tab-overview">
+        🌐 Przegląd & Macierz
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-nielsen">
+        🧠 10 Heurystyk Nielsena
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-wcag">
+        ♿ Standard WCAG 2.2
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-material">
+        🎨 Google Material 3
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-sandbox">
+        🧪 Interaktywny Poligon UI
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-checklist">
+        📋 Checklista Audytowa (<span id="completedCount">0</span>/<span id="totalCount">0</span>)
+      </button>
+    </nav>
+
+    <!-- VIEW 1: OVERVIEW & MATRIX -->
+    <section id="tab-overview" class="view-section active">
+      <h2 style="margin-bottom: 16px;">Macierz Zależności: Od Psychologii do Kodu</h2>
+      <p style="margin-bottom: 24px; color: var(--md-sys-color-on-surface-variant);">
+        Każda heurystyka Nielsena znajduje bezpośrednie odzwierciedlenie w wymogach dostępności WCAG 2.2 oraz gotowych wzorcach i tokenach Google Material 3.
+      </p>
+
+      <div class="table-responsive">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 25%;">Heurystyka Nielsena</th>
+              <th scope="col" style="width: 35%;">Kryteria WCAG 2.2</th>
+              <th scope="col" style="width: 40%;">Wzorce i Komponenty Material 3</th>
+            </tr>
+          </thead>
+          <tbody id="matrixTableBody">
+            <!-- Wypełniane dynamicznie przez JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- VIEW 2: NIELSEN HEURISTICS -->
+    <section id="tab-nielsen" class="view-section">
+      <h2 style="margin-bottom: 8px;">10 Heurystyk Użyteczności Jakoba Nielsena</h2>
+      <p style="margin-bottom: 24px; color: var(--md-sys-color-on-surface-variant);">
+        Fundament projektowania zorientowanego na człowieka (*User-Centered Design*). Kliknij lub filtruj, aby zgłębić antywzorce i dobre praktyki.
+      </p>
+
+      <div class="cards-grid" id="nielsenCardsContainer">
+        <!-- Renderowane przez JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 3: WCAG 2.2 -->
+    <section id="tab-wcag" class="view-section">
+      <div class="wcag-header">
+        <h2 style="color: #16a34a; margin-bottom: 8px;">Standard Dostępności Cyfrowej WCAG 2.2</h2>
+        <p>
+          Standard WCAG 2.2 wprowadza 9 nowych kryteriów sukcesu (m.in. rozmiar celu dotykowego 2.5.8, niezasłonięty fokus 2.4.11 czy eliminację nadmiarowego wpisywania danych 3.3.7). Spełnienie poziomu AA jest wymogiem Europejskiego Aktu o Dostępności (EAA).
+        </p>
+      </div>
+
+      <div class="cards-grid" id="wcagCardsContainer">
+        <!-- Renderowane przez JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 4: MATERIAL DESIGN 3 -->
+    <section id="tab-material" class="view-section">
+      <h2 style="margin-bottom: 8px;">Google Material Design 3 (Material You)</h2>
+      <p style="margin-bottom: 24px; color: var(--md-sys-color-on-surface-variant);">
+        Architektura języka projektowego Google: system kolorów tonalnych, zaokrągleń, siatka adaptacyjna i komponenty oparte na tokenach.
+      </p>
+
+      <div class="cards-grid" id="materialCardsContainer">
+        <!-- Renderowane przez JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 5: INTERACTIVE SANDBOX -->
+    <section id="tab-sandbox" class="view-section">
+      <h2 style="margin-bottom: 8px;">🧪 Interaktywny Poligon Projektowy (Live Sandbox)</h2>
+      <p style="margin-bottom: 24px; color: var(--md-sys-color-on-surface-variant);">
+        Zobacz i przetestuj na żywo różnicę między poprawnym a wadliwym wdrożeniem standardów M3, WCAG 2.2 i heurystyk.
+      </p>
+
+      <div class="sandbox-grid">
+        <!-- Demo 1: Button Hierarchy -->
+        <div class="demo-card">
+          <h4>1. Hierarchia Przycisków (M3 Buttons)</h4>
+          <p style="font-size: 0.88rem; margin-bottom: 16px; color: var(--md-sys-color-on-surface-variant);">
+            W M3 stosujemy jeden przycisk Filled na ekran, a pozostałe akcje różnicujemy wagą tonalną.
+          </p>
+          <div class="buttons-flow">
+            <button class="btn-m3 btn-filled">Filled (Główna)</button>
+            <button class="btn-m3 btn-tonal">Tonal</button>
+            <button class="btn-m3 btn-outlined">Outlined</button>
+            <button class="btn-m3 btn-text">Text</button>
+            <button class="fab-btn" title="Floating Action Button">+</button>
+          </div>
+        </div>
+
+        <!-- Demo 2: Target Size -->
+        <div class="demo-card">
+          <h4>2. Rozmiar Celu Dotykowego (WCAG 2.5.8 vs M3)</h4>
+          <p style="font-size: 0.88rem; margin-bottom: 16px; color: var(--md-sys-color-on-surface-variant);">
+            Czerwony obrys = minimalny wymóg WCAG 2.2 (24×24px). Zielony = standard Material 3 (48×48dp).
+          </p>
+          <div style="display: flex; gap: 24px; align-items: center;">
+            <div style="text-align: center;">
+              <div class="target-box" style="width: 24px; height: 24px;">
+                <span style="font-size: 14px;">✕</span>
+              </div>
+              <div style="font-size: 0.76rem; margin-top: 6px;">WCAG Min (24px)</div>
+            </div>
+            <div style="text-align: center;">
+              <div class="target-box target-m3">
+                <span style="font-size: 20px;">✓</span>
+              </div>
+              <div style="font-size: 0.76rem; margin-top: 6px; font-weight: 700; color: #16a34a;">Material 3 (48dp)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo 3: Live Inline Form Validation -->
+        <div class="demo-card">
+          <h4>3. Walidacja Formularza (Heurystyka #9 + WCAG 3.3.1)</h4>
+          <p style="font-size: 0.88rem; margin-bottom: 12px; color: var(--md-sys-color-on-surface-variant);">
+            Błąd ma ikonę, czytelną radę i nie znika po kliknięciu.
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label for="demoEmail" style="font-size: 0.84rem; font-weight: 600;">Adres e-mail konta</label>
+            <input type="text" id="demoEmail" value="stanislaw.kowalski" style="height: 44px; padding: 0 14px; border-radius: var(--radius-sm); border: 2px solid var(--md-sys-color-error); background: var(--md-sys-color-surface-container-lowest); color: var(--md-sys-color-on-surface);">
+            <div style="color: var(--md-sys-color-error); font-size: 0.82rem; display: flex; align-items: center; gap: 6px;">
+              <span>⚠️</span> Brak znaku '@' oraz domeny (np. jan@firma.pl).
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo 4: Undo Action -->
+        <div class="demo-card">
+          <h4>4. Wzorzec „Undo” (Heurystyka #3 — Kontrola)</h4>
+          <p style="font-size: 0.88rem; margin-bottom: 14px; color: var(--md-sys-color-on-surface-variant);">
+            Zamiast irytującego modala potwierdzania drobnych akcji, daj natychmiastowe cofnięcie:
+          </p>
+          <button id="demoDeleteBtn" class="btn-m3 btn-tonal" style="color: var(--md-sys-color-error);">
+            🗑️ Usuń element testowy
+          </button>
+          <div id="demoSnackbar" style="display: none; margin-top: 14px; background: #1f2937; color: #fff; padding: 12px 18px; border-radius: var(--radius-md); font-size: 0.88rem; justify-content: space-between; align-items: center;">
+            <span>Element usunięty.</span>
+            <button id="demoUndoBtn" style="background: none; border: none; color: #38bdf8; font-weight: 700; cursor: pointer; text-transform: uppercase;">Cofnij</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: CHECKLIST -->
+    <section id="tab-checklist" class="view-section">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h2>Checklista Gotowości Projektowej</h2>
+          <p style="color: var(--md-sys-color-on-surface-variant); font-size: 0.95rem;">
+            Zaznacz punkty spełnione w projekcie. Postęp jest automatycznie zapisywany w przeglądarce.
+          </p>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button id="resetChecklistBtn" class="btn-m3 btn-outlined" style="font-size: 0.82rem; padding: 6px 14px;">
+            Resetuj
+          </button>
+          <button id="exportChecklistBtn" class="btn-m3 btn-tonal" style="font-size: 0.82rem; padding: 6px 14px;">
+            Eksportuj Raport
+          </button>
+        </div>
+      </div>
+
+      <div class="checklist-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+
+      <div id="checklistItemsContainer">
+        <!-- Renderowane przez JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><strong>Baza Wiedzy: Nowoczesne Projektowanie Aplikacji</strong> — Materiały zgodne z Google Material Design 3, W3C WCAG 2.2 oraz NN/g.</p>
+    <p style="margin-top: 6px; font-size: 0.8rem; color: var(--md-sys-color-outline);">
+      Zbudowano w standardzie Accessible Web App.
+    </p>
+  </footer>
+
+  <script>
+    // --- BAZA DANYCH W PAMIĘCI APLIKACJI ---
+    const KNOWLEDGE_BASE = {
+      heurystyki: [
+        {
+          nr: 1,
+          tytul: "Widoczność statusu systemu",
+          oryginal: "Visibility of system status",
+          opis: "System powinien zawsze informować użytkowników o tym, co się dzieje, poprzez natychmiastową informację zwrotną.",
+          praktyka: "Wykorzystuj Skeleton Loaders zamiast pustych ekranów, wskaźniki postępu ładowania, Ripple Effect przy kliknięciu przycisku oraz Snackbar potwierdzający zapis w tle.",
+          antywzorzec: "Brak reakcji na kliknięcie przycisku 'Zapisz', przez co użytkownik klika nerwowo wielokrotnie.",
+          m3: "Circular/Linear Progress Indicator, Ripple, Snackbar, Badges",
+          wcag: "4.1.3 Status Messages (AA), 2.2.1 Timing Adjustable (A)"
+        },
+        {
+          nr: 2,
+          tytul: "Dopasowanie systemu do rzeczywistości",
+          oryginal: "Match between system and the real world",
+          opis: "System powinien mówić językiem użytkownika, używając pojęć i metafor znanych z życia codziennego.",
+          praktyka: "Używaj rozpoznawalnych powszechnie ikon (koszyk, teczka, lupa) i logicznej kolejności procesów (np. wybór produktu -> koszyk -> dostawa -> płatność).",
+          antywzorzec: "Wyświetlanie technicznych kodów wyjątków bazy danych (np. 'Error ORA-00942') w powiadomieniu dla klienta.",
+          m3: "Material Symbols (standardowa ikonografia), zrozumiałe Card Titles",
+          wcag: "3.1.1 Language of Page, 1.3.1 Info and Relationships"
+        },
+        {
+          nr: 3,
+          tytul: "Kontrola i swoboda użytkownika",
+          oryginal: "User control and freedom",
+          opis: "Zapewnij użytkownikowi natychmiastowe 'wyjście awaryjne' bez konieczności przechodzenia długiego dialogu.",
+          praktyka: "Wdrożenie wzorca 'Undo' (Cofnij) po usunięciu elementu, klawisz Esc zamykający każdy modal, możliwość powrotu w wielokrokowym wizardzie.",
+          antywzorzec: "Modal reklamowy lub błąd, którego nie da się zamknąć klawiaturą ani kliknięciem w tło.",
+          m3: "Snackbar z akcją 'Undo', Dialog z przyciskiem Anuluj, Bottom Sheet",
+          wcag: "2.1.2 No Keyboard Trap (A), 3.3.4 Error Prevention (AA)"
+        },
+        {
+          nr: 4,
+          tytul: "Spójność i standardy",
+          oryginal: "Consistency and standards",
+          opis: "Podążaj za konwencjami platformy. Użytkownicy oczekują, że Twoja aplikacja działa tak jak inne produkty, z których korzystają.",
+          praktyka: "Stałe umiejscowienie paska nawigacji, ujednolicone zaokrąglenia i tokeny kolorów, spójne nazwy akcji (nie mieszaj 'Zapisz' z 'Zatwierdź').",
+          antywzorzec: "Przycisk zatwierdzenia formularza raz na górze po lewej, a na innym ekranie na samym dole po prawej.",
+          m3: "Design Tokens, Navigation Bar/Rail/Drawer, Standard Shape Scale",
+          wcag: "3.2.3 Consistent Navigation (AA), 3.2.4 Consistent Identification (AA)"
+        },
+        {
+          nr: 5,
+          tytul: "Zapobieganie błędom",
+          oryginal: "Error prevention",
+          opis: "Jeszcze lepsze niż pomocne komunikaty o błędach jest staranne zaprojektowanie interfejsu, które eliminuje możliwość popełnienia błędu.",
+          praktyka: "Wybór daty z komponentu Date Picker zamiast wpisywania tekstem, automatyczne maskowanie numerów telefonów i kart, potwierdzenie akcji trwale destrukcyjnych.",
+          antywzorzec: "Pozwolenie na wysłanie wniosku z pustymi polami, a następnie wyczyszczenie całego formularza.",
+          m3: "Date Picker, Sliders, Dropdown Menu, Segmented Buttons",
+          wcag: "3.3.4 Error Prevention (AA), 3.3.7 Redundant Entry (WCAG 2.2 A)"
+        },
+        {
+          nr: 6,
+          tytul: "Rozpoznawanie zamiast przypominania",
+          oryginal: "Recognition rather than recall",
+          opis: "Zminimalizuj obciążenie pamięci użytkownika. Elementy, akcje i opcje powinny być bezpośrednio widoczne na ekranie.",
+          praktyka: "Pływające etykiety (Floating Labels), które nie znikają po rozpoczęciu pisania, historia wyszukiwań, podsumowanie zamówienia zawsze widoczne.",
+          antywzorzec: "Zastąpienie etykiet pól formularza zwykłym placeholderem, który znika zaraz po kliknięciu w pole.",
+          m3: "Outlined Text Field z trwałym Floating Label, Assist Chips, Recent Items",
+          wcag: "3.3.2 Labels or Instructions (A), 3.3.7 Redundant Entry (WCAG 2.2 A)"
+        },
+        {
+          nr: 7,
+          tytul: "Elastyczność i efektywność",
+          oryginal: "Flexibility and efficiency of use",
+          opis: "Interfejs powinien zadowalać nowicjuszy, a zaawansowanym użytkownikom oferować skróty klawiszowe i akceleratory.",
+          praktyka: "Skróty klawiszowe (np. Ctrl+K do wyszukiwarki, Ctrl+S do zapisu), akcje masowe na tabelach, filtry i personalizowane widoki.",
+          antywzorzec: "Wymuszanie klikania przez 5 podstron dla rutynowej operacji wykonywanej 40 razy dziennie.",
+          m3: "Extended FAB, Action Chips, Search Bar z filtrami, Quick Actions",
+          wcag: "2.1.1 Keyboard (A), 2.1.4 Character Key Shortcuts (A)"
+        },
+        {
+          nr: 8,
+          tytul: "Estetyczny i minimalistyczny design",
+          oryginal: "Aesthetic and minimalist design",
+          opis: "Interfejs nie powinien zawierać zbędnych informacji. Każda dodatkowa treść konkuruje o uwagę użytkownika.",
+          praktyka: "Zachowanie przestrzeni negatywnej (white space), progresywne ujawnianie treści (Progressive Disclosure w akordeonach), siatka 8dp.",
+          antywzorzec: "Zasypanie strony głównej 20 kolorowymi kafelkami o identycznej jaskrawości i wadze wizualnej.",
+          m3: "Siatka odstępów 8dp, Tonal Surfaces zamiast cieni, Cards",
+          wcag: "1.4.10 Reflow (AA), 1.4.12 Text Spacing (AA)"
+        },
+        {
+          nr: 9,
+          tytul: "Pomoc w rozpoznawaniu i naprawianiu błędów",
+          oryginal: "Help users recognize, diagnose, and recover from errors",
+          opis: "Komunikaty o błędach muszą być sformułowane prostym językiem, precyzyjnie opisywać usterkę i wskazywać jak ją naprawić.",
+          praktyka: "Walidacja inline w momencie opuszczenia pola (onBlur), czerwone obramowanie z ikoną ostrzegawczą oraz podpowiedzią: 'Podaj poprawny kod pocztowy w formacie 00-000'.",
+          antywzorzec: "Wyświetlenie u góry strony lakonicznego: 'Błąd walidacji danych' bez wskazania, którego pola dotyczy.",
+          m3: "Text Field Error State + Supporting Text, Helper Dialogs",
+          wcag: "3.3.1 Error Identification (A), 3.3.3 Error Suggestion (AA)"
+        },
+        {
+          nr: 10,
+          tytul: "Pomoc i dokumentacja",
+          oryginal: "Help and documentation",
+          opis: "Nawet najlepszy system może wymagać pomocy. Powinna być ona łatwo dostępna, zwięzła i osadzona w kontekście zadania.",
+          praktyka: "Kontekstowe dymki podpowiedzi (Tooltips), krótki onboarding dla nowych funkcji, stały punkt dostępu do pomocy w nagłówku, przyjazne puste stany.",
+          antywzorzec: "Odesłanie użytkownika do 200-stronicowego pliku PDF bez możliwości wyszukiwania haseł.",
+          m3: "Plain & Rich Tooltips, Help Center Drawer, Empty State Cards",
+          wcag: "3.2.6 Consistent Help (WCAG 2.2 AA), 3.3.2 Labels or Instructions"
+        }
+      ],
+
+      wcag: [
+        {
+          kod: "2.5.8",
+          tytul: "Rozmiar celu (Minimalny) [NOWOŚĆ WCAG 2.2]",
+          poziom: "AA",
+          zasada: "Funkcjonalność",
+          opis: "Wymiary celu dotykowego muszą wynosić co najmniej 24×24 piksele CSS lub zachowywać odpowiedni bufor odstępu. Google Material 3 podnosi poprzeczkę do 48×48 dp.",
+          kod_snippet: ".btn-touch { min-width: 48px; min-height: 48px; padding: 12px; }"
+        },
+        {
+          kod: "2.4.11",
+          tytul: "Fokus niezasłonięty (Minimalny) [NOWOŚĆ WCAG 2.2]",
+          poziom: "AA",
+          zasada: "Funkcjonalność",
+          opis: "Gdy element otrzymuje fokus klawiatury, nie może być całkowicie schowany pod pływającymi paskami, banerami cookies czy nagłówkiem.",
+          kod_snippet: "html { scroll-padding-top: 80px; scroll-padding-bottom: 72px; }"
+        },
+        {
+          kod: "2.5.7",
+          tytul: "Ruchy przeciągania (Dragging) [NOWOŚĆ WCAG 2.2]",
+          poziom: "AA",
+          zasada: "Funkcjonalność",
+          opis: "Funkcje oparte na przeciąganiu (np. Drag & Drop na tablicy Kanban, suwaki cenowe) muszą mieć alternatywę za pomocą pojedynczego kliknięcia (np. przyciski w górę/w dół).",
+          kod_snippet: "<button aria-label='Przenieś zadanie do kolumny Zrobione'>✓ Przenieś</button>"
+        },
+        {
+          kod: "3.3.7",
+          tytul: "Nadmiarowe wprowadzanie danych [NOWOŚĆ WCAG 2.2]",
+          poziom: "A",
+          zasada: "Zrozumiałość",
+          opis: "Nie zmuszaj użytkownika do ponownego wpisywania tych samych informacji w tym samym procesie zakupowym lub rejestracyjnym.",
+          kod_snippet: "<input type='checkbox' id='copyAddr'> <label for='copyAddr'>Adres rozliczeniowy taki sam</label>"
+        },
+        {
+          kod: "3.3.8",
+          tytul: "Dostępne uwierzytelnianie [NOWOŚĆ WCAG 2.2]",
+          poziom: "AA",
+          zasada: "Zrozumiałość",
+          opis: "Logowanie nie może wymagać rozwiązywania testów poznawczych (łamigłówki, skomplikowane CAPTCHA) ani blokować schowka. Nigdy nie blokuj atrybutu onpaste w polach hasła!",
+          kod_snippet: "<input type='password' autocomplete='current-password' onpaste='return true;'>"
+        },
+        {
+          kod: "1.4.3",
+          tytul: "Kontrast tekstu (Minimalny)",
+          poziom: "AA",
+          zasada: "Postrzegalność",
+          opis: "Kontrast tekstu zwykłego do tła wynosi co najmniej 4.5:1. Dla tekstu dużego (od 24px lub pogrubionego 18.5px) wynosi co najmniej 3.0:1.",
+          kod_snippet: "color: #1f1f1f; background: #ffffff; /* Kontrast 16.1:1 */"
+        },
+        {
+          kod: "1.4.11",
+          tytul: "Kontrast elementów nietekstowych",
+          poziom: "AA",
+          zasada: "Postrzegalność",
+          opis: "Kontury pól tekstowych, ikony funkcjonalne, przełączniki i wskaźniki stanu muszą mieć kontrast co najmniej 3.0:1 do sąsiedniego tła.",
+          kod_snippet: "border: 1.5px solid var(--md-sys-color-outline); /* >= 3:1 */"
+        },
+        {
+          kod: "2.1.1",
+          tytul: "Pełna obsługa klawiaturą",
+          poziom: "A",
+          zasada: "Funkcjonalność",
+          opis: "Wszystkie funkcje aplikacji muszą być dostępne z poziomu samej klawiatury (Tab, Shift+Tab, Enter, Spacja, Esc, Strzałki).",
+          kod_snippet: ":focus-visible { outline: 3px solid #005ac1; outline-offset: 2px; }"
+        }
+      ],
+
+      material: [
+        {
+          tytul: "System Kolorów & Palety Tonalne",
+          opis: "Dynamic Color generuje 13 tonów jasności dla każdej barwy. Role Primary, Secondary, Tertiary, Surface i odpowiadające im kolory 'On-*' gwarantują matematyczną zgodność z kontrastem WCAG.",
+          tag: "Kolorystyka & Kontrast"
+        },
+        {
+          tytul: "Elewacja Tonalna (Surface Tint)",
+          opis: "Koniec z ciemnymi, ciężkimi cieniami. W M3 głębokość buduje się domieszką koloru Primary do tła (Surface Tint od 0% do 14%), co działa doskonale zarówno w trybie jasnym, jak i ciemnym.",
+          tag: "Głębia & Elewacja"
+        },
+        {
+          tytul: "Hierarchia Przycisków (Buttons)",
+          opis: "Wyraźny podział na 5 poziomów wagi wizualnej: FAB (akcja kluczowa) -> Filled (główna) -> Tonal (ważna) -> Outlined (alternatywna) -> Text (pomocnicza).",
+          tag: "Komponenty"
+        },
+        {
+          tytul: "Adaptacyjne Klasy Okna (Window Classes)",
+          opis: "Podział na 3 kluczowe szerokości: Compact (<600dp -> Bottom Navigation), Medium (600-840dp -> Navigation Rail), Expanded (>840dp -> Navigation Drawer).",
+          tag: "Responsywność"
+        },
+        {
+          tytul: "Skala Kształtów (Shape Scale)",
+          opis: "Spójny promień zaokrągleń: od Extra Small (4dp) przez Medium (12dp) i Extra Large (28dp) aż po Full (zaokrąglenie pigułkowe 999dp dla przycisków i chipów).",
+          tag: "Stylistyka"
+        },
+        {
+          tytul: "Fizyka Ruchu (Motion Tokens)",
+          opis: "Naturalne krzywe przyspieszenia (Emphasized i Standard easing). Pełna obsługa zapytania CSS @media (prefers-reduced-motion) w celu ochrony osób z zaburzeniami błędnika.",
+          tag: "Animacje"
+        }
+      ],
+
+      checklist: [
+        { id: "c1", kategoria: "Wizualne", tekst: "Kontrast tekstu do tła wynosi co najmniej 4.5:1 (lub 3:1 dla nagłówków)", tag: "WCAG 1.4.3" },
+        { id: "c2", kategoria: "Wizualne", tekst: "Kontrast ramek formularzy i ikon funkcyjnych wynosi min. 3:1", tag: "WCAG 1.4.11" },
+        { id: "c3", kategoria: "Wizualne", tekst: "Kolor nie jest jedynym nośnikiem znaczenia (towarzyszy mu ikona lub etykieta)", tag: "WCAG 1.4.1 · Nielsen #1" },
+        { id: "c4", kategoria: "Klawiatura", tekst: "Cała aplikacja jest obsługiwana klawiaturą (Tab, Enter, Spacja, Strzałki)", tag: "WCAG 2.1.1" },
+        { id: "c5", kategoria: "Klawiatura", tekst: "Widoczny wskaźnik fokusa (outline min. 2px, wysoki kontrast)", tag: "WCAG 2.4.7" },
+        { id: "c6", kategoria: "Klawiatura", tekst: "Fokus nie jest zasłaniany przez nagłówki ani paski pływające (scroll-padding)", tag: "WCAG 2.2 - 2.4.11" },
+        { id: "c7", kategoria: "Klawiatura", tekst: "Okna modalne posiadają pułapkę fokusa, a klawisz Esc zamyka okno", tag: "WCAG 2.1.2 · Nielsen #3" },
+        { id: "c8", kategoria: "Dotyk", tekst: "Rozmiar klikalny elementów dotykowych to min. 48×48dp (lub bezwzględne 24×24px)", tag: "WCAG 2.2 - 2.5.8 · M3" },
+        { id: "c9", kategoria: "Dotyk", tekst: "Funkcje Drag & Drop mają klikalną alternatywę pojedynczym przyciskiem", tag: "WCAG 2.2 - 2.5.7" },
+        { id: "c10", kategoria: "Formularze", tekst: "Pola mają trwałe etykiety <label> (pływające etykiety nie znikają po wpisaniu)", tag: "WCAG 3.3.2 · Nielsen #6" },
+        { id: "c11", kategoria: "Formularze", tekst: "Brak konieczności ponownego wpisywania tych samych danych w procesie", tag: "WCAG 2.2 - 3.3.7" },
+        { id: "c12", kategoria: "Formularze", tekst: "Pola haseł nie blokują wklejania danych z menedżera haseł", tag: "WCAG 2.2 - 3.3.8" },
+        { id: "c13", kategoria: "UX", tekst: "Akcje usuwania oferują opcję Cofnij (Undo) w pasku Snackbar", tag: "Nielsen #3 · M3" },
+        { id: "c14", kategoria: "UX", tekst: "Błędy walidacji pokazują konkretną wskazówkę jak naprawić problem", tag: "WCAG 3.3.3 · Nielsen #9" },
+        { id: "c15", kategoria: "UX", tekst: "Aplikacja respektuje ustawienie prefers-reduced-motion dla animacji", tag: "WCAG 2.3.3 · M3" }
+      ]
+    };
+
+    // --- LOGIKA APLIKACJI ---
+
+    // 1. Renderowanie Macierzy
+    function renderMatrix() {
+      const tbody = document.getElementById('matrixTableBody');
+      tbody.innerHTML = KNOWLEDGE_BASE.heurystyki.map(h => `
+        <tr>
+          <td>
+            <strong>#${h.nr} ${h.tytul}</strong>
+            <div style="font-size: 0.8rem; color: var(--md-sys-color-outline); margin-top: 4px;">${h.oryginal}</div>
+          </td>
+          <td>
+            <span class="m3-chip" style="background: rgba(22, 163, 74, 0.15); color: #16a34a; font-weight: 700;">${h.wcag}</span>
+          </td>
+          <td>
+            <span class="m3-chip" style="background: rgba(2, 132, 199, 0.15); color: #0284c7; font-weight: 700;">${h.m3}</span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // 2. Renderowanie Heurystyk Nielsena
+    function renderNielsen(filter = "") {
+      const container = document.getElementById('nielsenCardsContainer');
+      const filtered = KNOWLEDGE_BASE.heurystyki.filter(h => 
+        h.tytul.toLowerCase().includes(filter) ||
+        h.opis.toLowerCase().includes(filter) ||
+        h.praktyka.toLowerCase().includes(filter) ||
+        h.m3.toLowerCase().includes(filter) ||
+        h.wcag.toLowerCase().includes(filter)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--md-sys-color-outline);">Brak wyników wyszukiwania dla frazy "${filter}"</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(h => `
+        <article class="m3-card">
+          <div class="card-header-row">
+            <div class="heuristic-number">${h.nr}</div>
+            <div class="card-title-group" style="flex: 1;">
+              <h3>${h.tytul}</h3>
+              <div class="card-sub">${h.oryginal}</div>
+            </div>
+          </div>
+          <p class="card-desc">${h.opis}</p>
+          <div class="box-info">
+            <strong>✅ Zastosowanie w aplikacji:</strong><br>${h.praktyka}
+          </div>
+          <div class="box-warning">
+            <strong>❌ Antywzorzec:</strong><br>${h.antywzorzec}
+          </div>
+          <div class="tags-list">
+            <span class="m3-chip">🎨 M3: ${h.m3}</span>
+            <span class="m3-chip">♿ WCAG: ${h.wcag}</span>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // 3. Renderowanie WCAG 2.2
+    function renderWCAG(filter = "") {
+      const container = document.getElementById('wcagCardsContainer');
+      const filtered = KNOWLEDGE_BASE.wcag.filter(w =>
+        w.kod.toLowerCase().includes(filter) ||
+        w.tytul.toLowerCase().includes(filter) ||
+        w.opis.toLowerCase().includes(filter) ||
+        w.zasada.toLowerCase().includes(filter)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--md-sys-color-outline);">Brak wyników wyszukiwania</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(w => `
+        <article class="m3-card">
+          <div class="card-header-row">
+            <div class="m3-badge badge-wcag" style="font-size: 0.9rem;">${w.kod}</div>
+            <div class="card-title-group" style="flex: 1;">
+              <h3>${w.tytul}</h3>
+              <div class="card-sub">Poziom ${w.poziom} · ${w.zasada}</div>
+            </div>
+          </div>
+          <p class="card-desc">${w.opis}</p>
+          <div class="code-preview">
+            <code>${w.kod_snippet}</code>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // 4. Renderowanie Material 3
+    function renderMaterial(filter = "") {
+      const container = document.getElementById('materialCardsContainer');
+      const filtered = KNOWLEDGE_BASE.material.filter(m =>
+        m.tytul.toLowerCase().includes(filter) ||
+        m.opis.toLowerCase().includes(filter) ||
+        m.tag.toLowerCase().includes(filter)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--md-sys-color-outline);">Brak wyników wyszukiwania</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(m => `
+        <article class="m3-card">
+          <div class="card-header-row">
+            <div class="m3-badge badge-m3">M3</div>
+            <div class="card-title-group" style="flex: 1;">
+              <h3>${m.tytul}</h3>
+              <div class="card-sub">${m.tag}</div>
+            </div>
+          </div>
+          <p class="card-desc">${m.opis}</p>
+        </article>
+      `).join('');
+    }
+
+    // 5. Renderowanie Checklisty i obsługa LocalStorage
+    const CHECKLIST_STORAGE_KEY = 'baza_wiedzy_checklist_state';
+    let savedState = JSON.parse(localStorage.getItem(CHECKLIST_STORAGE_KEY) || '{}');
+
+    function updateProgress() {
+      const total = KNOWLEDGE_BASE.checklist.length;
+      const completed = Object.values(savedState).filter(Boolean).length;
+      const pct = Math.round((completed / total) * 100);
+
+      document.getElementById('completedCount').textContent = completed;
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.querySelector('.checklist-progress-bar').setAttribute('aria-valuenow', pct);
+    }
+
+    function renderChecklist() {
+      const container = document.getElementById('checklistItemsContainer');
+      container.innerHTML = KNOWLEDGE_BASE.checklist.map(item => {
+        const isChecked = !!savedState[item.id];
+        return `
+          <div class="check-item ${isChecked ? 'completed' : ''}" data-id="${item.id}">
+            <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''} aria-label="${item.tekst}">
+            <div class="item-content">
+              <label for="${item.id}" class="item-text">${item.tekst}</label>
+              <div class="item-meta">
+                <span class="m3-chip">${item.kategoria}</span>
+                <span class="m3-chip">${item.tag}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Obsługa kliknięć
+      container.querySelectorAll('.check-item').forEach(el => {
+        const checkbox = el.querySelector('input[type="checkbox"]');
+        const id = el.dataset.id;
+
+        checkbox.addEventListener('change', (e) => {
+          savedState[id] = e.target.checked;
+          localStorage.setItem(CHECKLIST_STORAGE_KEY, JSON.stringify(savedState));
+          if (e.target.checked) {
+            el.classList.add('completed');
+          } else {
+            el.classList.remove('completed');
+          }
+          updateProgress();
+        });
+      });
+
+      updateProgress();
+    }
+
+    // Reset Checklisty
+    document.getElementById('resetChecklistBtn').addEventListener('click', () => {
+      if (confirm('Czy na pewno chcesz zresetować stan checklisty?')) {
+        savedState = {};
+        localStorage.removeItem(CHECKLIST_STORAGE_KEY);
+        renderChecklist();
+      }
+    });
+
+    // Eksport Checklisty do Markdown
+    document.getElementById('exportChecklistBtn').addEventListener('click', () => {
+      let md = `# Raport Audytu Dostępności i UX (M3 · WCAG 2.2 · Nielsen)\n\n`;
+      md += `Data audytu: ${new Date().toLocaleDateString('pl-PL')}\n\n`;
+      KNOWLEDGE_BASE.checklist.forEach(item => {
+        const mark = savedState[item.id] ? '[x]' : '[ ]';
+        md += `- ${mark} **${item.tekst}** \`[${item.tag}]\`\n`;
+      });
+      const blob = new Blob([md], { type: 'text/markdown;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `audyt_ui_ux_${Date.now()}.md`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // 6. Tabs switching
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const viewSections = document.querySelectorAll('.view-section');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        viewSections.forEach(v => v.classList.remove('active'));
+
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        const targetView = document.getElementById(btn.dataset.tab);
+        if (targetView) targetView.classList.add('active');
+      });
+    });
+
+    // 7. Wyszukiwarka na żywo
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      renderNielsen(q);
+      renderWCAG(q);
+      renderMaterial(q);
+    });
+
+    // 8. Tryb ciemny / jasny z zapamiętywaniem
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme_preference') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggleBtn.textContent = '☀️';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeToggleBtn.textContent = '🌙';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme_preference', newTheme);
+      themeToggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // 9. Interaktywne Demo Snackbar Undo
+    const deleteBtn = document.getElementById('demoDeleteBtn');
+    const snackbar = document.getElementById('demoSnackbar');
+    const undoBtn = document.getElementById('demoUndoBtn');
+    let timer = null;
+
+    deleteBtn.addEventListener('click', () => {
+      snackbar.style.display = 'flex';
+      deleteBtn.disabled = true;
+      deleteBtn.style.opacity = '0.5';
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        snackbar.style.display = 'none';
+        deleteBtn.disabled = false;
+        deleteBtn.style.opacity = '1';
+      }, 5000);
+    });
+
+    undoBtn.addEventListener('click', () => {
+      snackbar.style.display = 'none';
+      deleteBtn.disabled = false;
+      deleteBtn.style.opacity = '1';
+      clearTimeout(timer);
+    });
+
+    // Inicjalizacja
+    renderMatrix();
+    renderNielsen();
+    renderWCAG();
+    renderMaterial();
+    renderChecklist();
+  </script>
+</body>
+</html>
