@@ -1,0 +1,291 @@
+{
+  "nazwa": "Baza Wiedzy: Nowoczesne Projektowanie Aplikacji",
+  "wersja": "2.0.0",
+  "opis": "Kompendium wiedzy łączące Google Material Design 3, WCAG 2.2 oraz 10 Heurystyk Jakoba Nielsena w spójny proces projektowania i wdrażania interfejsów cyfrowych.",
+  "filary": [
+    {
+      "id": "m3",
+      "nazwa": "Google Material Design 3 (M3)",
+      "opis": "Design system Google oparty na adaptacyjnych kolorach tonalnych, elewacji powierzchni, czytelnej hierarchii typograficznej oraz płynnym ruchu.",
+      "ikona": "palette"
+    },
+    {
+      "id": "wcag",
+      "nazwa": "WCAG 2.2 (A11y)",
+      "opis": "Międzynarodowy standard dostępności cyfrowej dla stron i aplikacji mobilnych/webowych, oparty na 4 zasadach POUR i zaktualizowany o najnowsze kryteria WCAG 2.2.",
+      "ikona": "accessibility"
+    },
+    {
+      "id": "nielsen",
+      "nazwa": "10 Heurystyk Nielsena",
+      "opis": "Złote zasady użyteczności interfejsów użytkownika opracowane przez Jakoba Nielsena i Donalda Normana (Nielsen Norman Group).",
+      "ikona": "psychology"
+    }
+  ],
+  "heurystyki_nielsena": [
+    {
+      "numer": 1,
+      "tytul": "Widoczność statusu systemu (Visibility of system status)",
+      "opis": "System powinien zawsze informować użytkowników o tym, co się dzieje, poprzez odpowiednią informację zwrotną w rozsądnym czasie.",
+      "zastosowanie_w_aplikacji": "Wskaźniki postępu, szkielety ładowania (skeleton screens), banery statusu (Snackbar), natychmiastowa reakcja na kliknięcie (ripple effect).",
+      "antywzorzec": "Brak reakcji na kliknięcie przycisku zapisu, 'zawieszony' interfejs bez wskaźnika ładowania.",
+      "powiazanie_m3": "Circular/Linear Progress Indicator, Ripple Effect, Snackbar",
+      "powiazanie_wcag": "4.1.3 Status Messages (AA), 2.2.1 Timing Adjustable (A)"
+    },
+    {
+      "numer": 2,
+      "tytul": "Dopasowanie systemu do rzeczywistości (Match between system and the real world)",
+      "opis": "System powinien mówić językiem użytkowników — używać słów, zwrotów i pojęć im znanych, a nie terminów technicznych.",
+      "zastosowanie_w_aplikacji": "Metafory z realnego świata (koszyk, teczka, foldery, ikona lupy do szukania), naturalny porządek informacji.",
+      "antywzorzec": "Wyświetlanie kodów błędów bazy danych (np. 'SQL Exception ORA-00942') lub wewnętrznych nazw zmiennych.",
+      "powiazanie_m3": "Material Symbols (powszechnie rozpoznawalne ikony), Card, Badge",
+      "powiazanie_wcag": "3.1.3 Unusual Words (AAA), 3.1.4 Abbreviations (AAA), 1.3.1 Info and Relationships"
+    },
+    {
+      "numer": 3,
+      "tytul": "Kontrola i swoboda użytkownika (User control and freedom)",
+      "opis": "Użytkownicy często wybierają funkcje przez pomyłkę. Potrzebują wyraźnie oznaczonego 'wyjścia awaryjnego' bez konieczności przechodzenia długiego dialogu.",
+      "zastosowanie_w_aplikacji": "Przycisk 'Cofnij' (Undo) przy usuwaniu, łatwe zamykanie okien (przycisk X i klawisz Esc), możliwość edycji kroków w kreatorach.",
+      "antywzorzec": "Nieodwracalne usunięcie danych bez ostrzeżenia lub modal bez przycisku zamknięcia blokujący cały ekran.",
+      "powiazanie_m3": "Snackbar z akcją 'Undo', Dialog z opcją 'Anuluj', Dismissible Bottom Sheet",
+      "powiazanie_wcag": "2.1.2 No Keyboard Trap (A), 2.4.11 Focus Not Obscured (AA), 3.3.4 Error Prevention (Legal/Financial) (AA)"
+    },
+    {
+      "numer": 4,
+      "tytul": "Spójność i standardy (Consistency and standards)",
+      "opis": "Użytkownicy nie powinni zastanawiać się, czy różne słowa, sytuacje lub akcje oznaczają to samo. Należy podążać za konwencjami platformy.",
+      "zastosowanie_w_aplikacji": "Spójne nazewnictwo przycisków, jednolite umiejscowienie nawigacji, ujednolicone ikony i kolory w całym ekosystemie.",
+      "antywzorzec": "Na jednym ekranie 'Zapisz', na innym 'Zatwierdź', a na trzecim 'OK' do tej samej operacji.",
+      "powiazanie_m3": "M3 Design Tokens, Navigation Bar / Rail, Standardized Shape Scale",
+      "powiazanie_wcag": "3.2.3 Consistent Navigation (AA), 3.2.4 Consistent Identification (AA), 3.2.6 Consistent Help (WCAG 2.2 AA)"
+    },
+    {
+      "numer": 5,
+      "tytul": "Zapobieganie błędom (Error prevention)",
+      "opis": "Jeszcze lepsze niż dobre komunikaty o błędach jest staranne projektowanie, które w pierwszej kolejności zapobiega powstawaniu problemu.",
+      "zastosowanie_w_aplikacji": "Wybór daty z kalendarza zamiast ręcznego wpisywania, maskowanie pól (np. numer telefonu), potwierdzenie przed trwałym usunięciem.",
+      "antywzorzec": "Pozwolenie użytkownikowi na wypełnienie 20 pól formularza i odrzucenie całości dopiero po kliknięciu 'Wyślij' z powodu złego formatu daty.",
+      "powiazanie_m3": "Date Picker, Menu Dropdown, Sliders, Autocomplete Text Field",
+      "powiazanie_wcag": "3.3.4 Error Prevention (AA), 3.3.7 Redundant Entry (WCAG 2.2 A), 3.3.8 Accessible Authentication (WCAG 2.2 AA)"
+    },
+    {
+      "numer": 6,
+      "tytul": "Rozpoznawanie zamiast przypominania (Recognition rather than recall)",
+      "opis": "Zminimalizuj obciążenie pamięci użytkownika, sprawiając, że elementy, akcje i opcje są widoczne. Użytkownik nie powinien musieć pamiętać informacji z poprzedniego ekranu.",
+      "zastosowanie_w_aplikacji": "Historia ostatnich wyszukiwań, widoczne etykiety formularza (pływające lub stałe), czytelne podsumowanie koszyka przed zakupem.",
+      "antywzorzec": "Znikający placeholder w formularzu po rozpoczęciu pisania bez widocznej etykiety (użytkownik zapomina co wpisuje).",
+      "powiazanie_m3": "Outlined/Filled Text Field z trwałym Floating Label, Assist Chips, Recent Items List",
+      "powiazanie_wcag": "3.3.2 Labels or Instructions (A), 3.3.7 Redundant Entry (WCAG 2.2 A)"
+    },
+    {
+      "numer": 7,
+      "tytul": "Elastyczność i efektywność użytkowania (Flexibility and efficiency of use)",
+      "opis": "Interfejs powinien zadowalać zarówno niedoświadczonych, jak i zaawansowanych użytkowników. Akceleratory i skróty klawiszowe przyspieszają interakcję.",
+      "zastosowanie_w_aplikacji": "Skróty klawiszowe (Ctrl+K, Esc, Ctrl+S), filtry i sortowanie w tabelach, możliwość personalizacji widoku (widok siatki vs listy).",
+      "antywzorzec": "Wymuszanie powolnego, wielokrokowego kreatora dla rutynowej czynności wykonywanej przez administratora 50 razy dziennie.",
+      "powiazanie_m3": "Action Chips, Extended FAB, Search Bar z filtrami, Quick Action Bottom Sheet",
+      "powiazanie_wcag": "2.1.1 Keyboard (A), 2.1.4 Character Key Shortcuts (A), 2.4.5 Multiple Ways (AA)"
+    },
+    {
+      "numer": 8,
+      "tytul": "Estetyczny i minimalistyczny design (Aesthetic and minimalist design)",
+      "opis": "Interfejsy nie powinny zawierać informacji, które są nieistotne lub rzadko potrzebne. Każda dodatkowa jednostka informacji konkuruje z istotnymi danymi.",
+      "zastosowanie_w_aplikacji": "Dużo przestrzeni negatywnej (white space), progresywne ujawnianie treści (progressive disclosure), jasna hierarchia wizualna.",
+      "antywzorzec": "Zawalenie ekranu głównego 30 kafelkami, migającymi bannerami i setkami linków o identycznej wadze wizualnej.",
+      "powiazanie_m3": "M3 Spacing Scale (8dp grid), Cards z czytelnym podziałem, Accordions, Tonal Surfaces",
+      "powiazanie_wcag": "1.4.10 Reflow (AA), 1.4.12 Text Spacing (AA), 1.3.2 Meaningful Sequence (A)"
+    },
+    {
+      "numer": 9,
+      "tytul": "Pomoc w rozpoznawaniu, diagnozowaniu i naprawianiu błędów (Help users recognize, diagnose, and recover from errors)",
+      "opis": "Komunikaty o błędach powinny być formułowane w prostym języku, precyzyjnie wskazywać problem i konstruktywnie podpowiadać rozwiązanie.",
+      "zastosowanie_w_aplikacji": "Czerwone obramowanie z konkretną radą: 'Hasło musi zawierać co najmniej jedną cyfrę', link do zresetowania hasła, zachowanie wpisanych danych.",
+      "antywzorzec": "Czerwony napis 'Błąd nr 418' lub ogólny komunikat 'Wystąpił nieoczekiwany błąd, spróbuj ponownie'.",
+      "powiazanie_m3": "Error State w Text Fields (Supporting text), Helper Dialogs, Snackbar z ponowieniem",
+      "powiazanie_wcag": "3.3.1 Error Identification (A), 3.3.3 Error Suggestion (AA)"
+    },
+    {
+      "numer": 10,
+      "tytul": "Pomoc i dokumentacja (Help and documentation)",
+      "opis": "Nawet jeśli lepiej jest, gdy system może być używany bez dokumentacji, pomoc i dokumentacja mogą być niezbędne. Powinna być łatwa do przeszukania i skupiona na zadaniu użytkownika.",
+      "zastosowanie_w_aplikacji": "Dymki podpowiedzi (Tooltips), interaktywny krótki onboarding, łatwo dostępny panel pomocy/FAQ, kontekstowy chatbot lub infolinia.",
+      "antywzorzec": "Brak jakiegokolwiek wsparcia lub odesłanie do 300-stronicowego pliku PDF bez wyszukiwarki.",
+      "powiazanie_m3": "Tooltips (Plain & Rich), Badges, Help Center Drawer, Search Bar",
+      "powiazanie_wcag": "3.2.6 Consistent Help (WCAG 2.2 AA), 3.3.2 Labels or Instructions (A)"
+    }
+  ],
+  "wcag_kryteria_kluczowe": [
+    {
+      "kod": "1.4.3",
+      "nazwa": "Kontrast (Minimalny)",
+      "poziom": "AA",
+      "zasada": "Postrzegalność (Perceivable)",
+      "opis": "Wizualna prezentacja tekstu oraz obrazów tekstu musi mieć współczynnik kontrastu co najmniej 4.5:1 (lub 3:1 dla tekstu dużego: od 18pt / 24px lub pogrubionego 14pt / 18.5px).",
+      "wdrozenie": "Używanie narzędzi takich jak Material Theme Builder do weryfikacji tokenów on-surface i on-primary na ich tłach.",
+      "wskazowka_kodu": "color: #1f1f1f; background-color: #ffffff; /* Kontrast 16.1:1 */"
+    },
+    {
+      "kod": "1.4.11",
+      "nazwa": "Kontrast elementów nietekstowych",
+      "poziom": "AA",
+      "zasada": "Postrzegalność (Perceivable)",
+      "opis": "Elementy interfejsu (ramki inputów, przyciski, ikony funkcjonalne) oraz stany (focus, zaznaczenie) muszą mieć kontrast co najmniej 3:1 względem otaczającego tła.",
+      "wdrozenie": "Obramowania nieaktywnych pól tekstowych i wskaźniki przełączników (Switch) muszą być wyraźnie odróżnialne od tła strony.",
+      "wskazowka_kodu": "border: 1.5px solid var(--md-sys-color-outline); /* Kontrast >= 3:1 */"
+    },
+    {
+      "kod": "2.1.1",
+      "nazwa": "Klawiatura",
+      "poziom": "A",
+      "zasada": "Funkcjonalność (Operable)",
+      "opis": "Wszystkie funkcje treści muszą być obsługiwane za pomocą interfejsu klawiatury bez konieczności używania określonego czasu pojedynczych naciśnięć klawiszy.",
+      "wdrozenie": "Obsługa Tab, Shift+Tab, Enter, Spacja oraz strzałek. Wykorzystywanie natywnych znaczników HTML <button>, <a>, <input>.",
+      "wskazowka_kodu": "button.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { ... } });"
+    },
+    {
+      "kod": "2.4.7",
+      "nazwa": "Widoczny fokus",
+      "poziom": "AA",
+      "zasada": "Funkcjonalność (Operable)",
+      "opis": "Każdy element interfejsu użytkownika, który można aktywować klawiaturą, musi mieć widoczny wskaźnik fokusa klawiatury.",
+      "wdrozenie": "Nigdy nie wolno stosować 'outline: none' bez zastąpienia go wyraźnym, kontrastowym obramowaniem lub cieniem.",
+      "wskazowka_kodu": ":focus-visible { outline: 3px solid #005ac1; outline-offset: 2px; }"
+    },
+    {
+      "kod": "2.4.11",
+      "nazwa": "Fokus niezasłonięty (Minimalny) [NOWOŚĆ WCAG 2.2]",
+      "poziom": "AA",
+      "zasada": "Funkcjonalność (Operable)",
+      "opis": "Gdy element interfejsu otrzymuje fokus klawiatury, nie może być całkowicie ukryty pod pływającymi paskami, banerami cookies czy nagłówkami 'sticky'.",
+      "wdrozenie": "Dodanie 'scroll-padding-top' i 'scroll-padding-bottom' odpowiadającego wysokości stałych nagłówków i dolnych pasków nawigacji.",
+      "wskazowka_kodu": "html { scroll-padding-top: 80px; scroll-padding-bottom: 72px; scroll-behavior: smooth; }"
+    },
+    {
+      "kod": "2.5.8",
+      "nazwa": "Rozmiar celu dotykowego (Minimalny) [NOWOŚĆ WCAG 2.2]",
+      "poziom": "AA",
+      "zasada": "Funkcjonalność (Operable)",
+      "opis": "Rozmiar celu dla wskazań dotykowych wynosi co najmniej 24 na 24 piksele CSS (chyba że odstęp do sąsiedniego celu daje ekwiwalent okręgu 24px). Uwaga: Google Material 3 zaleca jeszcze wyższy standard: 48x48 dp!",
+      "wdrozenie": "Użycie paddingu lub niewidocznego obszaru dotykowego (hitbox) na małych ikonach.",
+      "wskazowka_kodu": ".icon-btn { min-width: 48px; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }"
+    },
+    {
+      "kod": "2.5.7",
+      "nazwa": "Ruchy przeciągania (Dragging Movements) [NOWOŚĆ WCAG 2.2]",
+      "poziom": "AA",
+      "zasada": "Funkcjonalność (Operable)",
+      "opis": "Wszelkie funkcje oparte na przeciąganiu (np. drag & drop, przesuwanie suwaków) muszą mieć prostą alternatywę za pomocą pojedynczego kliknięcia (np. przyciski 'W górę' / 'W dół').",
+      "wdrozenie": "W listach zadań z możliwością sortowania metodą przeciągnij-i-upuść należy dodać menu kontekstowe z opcjami 'Przesuń wyżej / niżej'.",
+      "wskazowka_kodu": "<button aria-label='Przesuń wiersz w górę'>▲</button><button aria-label='Przesuń wiersz w dół'>▼</button>"
+    },
+    {
+      "kod": "3.2.6",
+      "nazwa": "Spójna pomoc (Consistent Help) [NOWOŚĆ WCAG 2.2]",
+      "poziom": "A",
+      "zasada": "Zrozumiałość (Understandable)",
+      "opis": "Jeśli witryna oferuje mechanizmy pomocy (np. kontakt, czat, FAQ), muszą one znajdować się w tym samym względnym porządku i miejscu na każdej podstronie.",
+      "wdrozenie": "Umieszczenie stałego odnośnika do centrum pomocy w nagłówku lub stopce w stałej kolejności elementów.",
+      "wskazowka_kodu": "<!-- Stały element w nagłówku każdej podstrony -->\n<nav aria-label='Nawigacja główna'>...<a href='/pomoc'>Pomoc</a></nav>"
+    },
+    {
+      "kod": "3.3.7",
+      "nazwa": "Nadmiarowe wprowadzanie danych (Redundant Entry) [NOWOŚĆ WCAG 2.2]",
+      "poziom": "A",
+      "zasada": "Zrozumiałość (Understandable)",
+      "opis": "Informacje wprowadzone wcześniej przez użytkownika w tym samym procesie nie powinny być ponownie wymagane do wpisania ręcznego (chyba że jest to konieczne ze względów bezpieczeństwa).",
+      "wdrozenie": "Autouzupełnianie adresu dostawy jako adresu rozliczeniowego z opcją 'Adres rozliczeniowy taki sam jak dostawy'.",
+      "wskazowka_kodu": "<input type='checkbox' id='sameAddress'> <label for='sameAddress'>Użyj adresu dostawy</label>"
+    },
+    {
+      "kod": "3.3.8",
+      "nazwa": "Dostępne uwierzytelnianie (Accessible Authentication) [NOWOŚĆ WCAG 2.2]",
+      "poziom": "AA",
+      "zasada": "Zrozumiałość (Understandable)",
+      "opis": "Proces logowania nie może polegać na testach funkcji poznawczych (np. zapamiętywanie hasła bez możliwości wklejenia, rozwiązywanie łamigłówek, przepisywanie znaków z CAPTCHA), chyba że dostępna jest alternatywa lub wsparcie menedżerów haseł.",
+      "wdrozenie": "Nigdy nie blokuj atrybutu paste w polach hasła! Obsługuj WebAuthn / Passkeys, logowanie linkiem e-mail (magic link) lub kody SMS/TOTP z obsługą autouzupełniania.",
+      "wskazowka_kodu": "<input type='password' autocomplete='current-password' onpaste='return true;'>"
+    }
+  ],
+  "material_design_3_standardy": [
+    {
+      "sekcja": "System Kolorów (Color Roles & Tonal Palettes)",
+      "zagadnienia": [
+        {
+          "pojecie": "Role Barwne (Semantic Roles)",
+          "opis": "Material 3 nie definiuje kolorów statycznie, lecz poprzez role: Primary (główna akcja), Secondary (mniej widoczne komponenty), Tertiary (kontrastujący akcent do balansowania), Error (błędy), Surface (tło i panele) oraz odpowiadające im kolory 'On-*' (tekst na danym tle).",
+          "zasada_m3": "Kolory 'On' (np. on-primary, on-surface) muszą zawsze gwarantować kontrast z bazową powierzchnią."
+        },
+        {
+          "pojecie": "Elewacja Tonalna (Tonal Elevation)",
+          "opis": "W M3 elewacja nie jest tworzona przez głębokie, czarne cienie (jak w M2), lecz przez domieszkę koloru podstawowego (Surface Tint) do koloru powierzchni. Wyższy poziom elewacji (Level 1 do Level 5) oznacza większe nasycenie tintem.",
+          "zasada_m3": "W trybie ciemnym elewacja tonalna zapobiega męczącemu świeceniu czystej bieli i buduje subtelną hierarchię."
+        },
+        {
+          "pojecie": "Dynamic Color (Material You)",
+          "opis": "Algorytm generuje kompletną, spójną pod względem kontrastu paletę kolorów na podstawie pojedynczego koloru źródłowego (seed color) lub tapety użytkownika.",
+          "zasada_m3": "Kontrast jest zachowany matematycznie na każdym poziomie tonów (od 0 - czarny, do 100 - biały)."
+        }
+      ]
+    },
+    {
+      "sekcja": "Typografia i Hierarchia (Typography System)",
+      "zagadnienia": [
+        {
+          "pojecie": "Skala 15 stylów tekstu",
+          "opis": "Podział na 5 ról o 3 rozmiarach każda (Small, Medium, Large): Display (duże banery), Headline (główne nagłówki sekcji), Title (tytuły kart i list), Body (tekst czytany), Label (przyciski, etykiety pól, chipy).",
+          "zasada_m3": "Body Large (16px / sp) to standardowy rozmiar dla długiego tekstu gwarantujący komfort czytania."
+        },
+        {
+          "pojecie": "Jednostki sp i rem",
+          "opis": "Stosowanie 'sp' (scale-independent pixels w Androidzie) lub 'rem' (w CSS), co pozwala na automatyczne skalowanie tekstu zgodnie z ustawieniami dostępności w telefonie użytkownika bez rozbijania układu.",
+          "zasada_m3": "Układ musi wytrzymać powiększenie czcionki o co najmniej 200% bez utraty treści (WCAG 1.4.4)."
+        }
+      ]
+    },
+    {
+      "sekcja": "Układ i Siatka (Layout & Responsive Grid)",
+      "zagadnienia": [
+        {
+          "pojecie": "Rytm 4dp / 8dp",
+          "opis": "Wszystkie odstępy (padding, margin, gap) oraz rozmiary komponentów powinny być wielokrotnością 8dp (lub 4dp dla małych odstępów).",
+          "zasada_m3": "Gwarantuje wizualną harmonijność i matematyczną spójność na ekranach o różnej gęstości pikseli."
+        },
+        {
+          "pojecie": "Klasy Szerokości (Window Size Classes)",
+          "opis": "Compact (< 600dp, np. smartfony pionowo, 4 kolumny siatki), Medium (600 - 840dp, np. tablety i foldables, 8 kolumn), Expanded (> 840dp, np. monitory i tablety poziomo, 12 kolumn).",
+          "zasada_m3": "W widoku Compact stosujemy Bottom Navigation Bar; w Medium stosujemy Navigation Rail; w Expanded pełny Navigation Drawer."
+        }
+      ]
+    },
+    {
+      "sekcja": "Komponenty i Kształty (Components & Shape Scale)",
+      "zagadnienia": [
+        {
+          "pojecie": "Hierarchia Przycisków (Buttons)",
+          "opis": "Filled (akcja pierwszorzędna, największa waga wizualna), Elevated (do odróżnienia na wzorzystym tle), Tonal (ważna, ale nie dominująca akcja), Outlined (akcje alternatywne), Text (akcje pomocnicze, anulowanie).",
+          "zasada_m3": "Na jednym ekranie powinien dominować maksymalnie jeden przycisk Filled lub Floating Action Button (FAB)."
+        },
+        {
+          "pojecie": "Skala Zaokrągleń Kształtów (Shape Scale)",
+          "opis": "None (0dp), Extra Small (4dp), Small (8dp), Medium (12dp), Large (16dp), Extra Large (28dp), Full (pill shape 999dp dla chipów i przycisków).",
+          "zasada_m3": "W M3 zaokrąglenia są wyraźniejsze niż w starszych wersjach, nadając interfejsowi przyjazny, organiczny charakter."
+        }
+      ]
+    },
+    {
+      "sekcja": "Ruch i Fizyka Animacji (Motion & Transition)",
+      "zagadnienia": [
+        {
+          "pojecie": "Krzywe Easing (Easing Tokens)",
+          "opis": "Emphasized (dla elementów przyciągających uwagę), Standard (dla typowych przejść), Linear (tylko dla animacji obrotu lub postępu).",
+          "zasada_m3": "Elementy nigdy nie ruszają się mechanicznie ze stałą prędkością – przyspieszają i łagodnie wyhamowują."
+        },
+        {
+          "pojecie": "Wsparcie dla prefers-reduced-motion",
+          "opis": "Gdy użytkownik w systemie wyłączył animacje, aplikacja zastępuje gwałtowne ruchy subtelnym przenikaniem (opacity) lub całkowicie wyłącza animację.",
+          "zasada_m3": "Niezbędny wymóg dostępności dla osób z epilepsją fotogenną i zaburzeniami błędnika."
+        }
+      ]
+    }
+  ]
+}
